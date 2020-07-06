@@ -25,7 +25,7 @@ public class AnimalGameController {
     private AnchorPane pane;
 
     @FXML
-    private MenuBar manuBar;
+    private MenuBar menuBar;
 
     @FXML
     private Menu menuFile;
@@ -43,7 +43,7 @@ public class AnimalGameController {
     private Text captionText;
 
     @FXML
-    private Text quessText;
+    private Text guessText;
 
     @FXML
     private Button yesButton;
@@ -66,7 +66,7 @@ public class AnimalGameController {
 	private void setVisableGuessPane(boolean bool) {
 		this.yesButton.setVisible(bool);
 		this.noButton.setVisible(bool);
-		this.quessText.setVisible(bool);
+		this.guessText.setVisible(bool);
 	}
 	
 	private void setVisableStartPane(boolean bool) {

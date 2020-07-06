@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3151.project3.view.AnimalGameController">
    <children>
-      <MenuBar fx:id="manuBar" prefHeight="25.0" prefWidth="479.0">
+      <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="479.0">
         <menus>
           <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
             <items>
@@ -25,32 +25,32 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Text layoutX="64.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Animal Game!">
+      <Text fx:id="titleText" layoutX="64.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Animal Game!">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <Text layoutX="79.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Think of an animal and start the game.">
+      <Text fx:id="captionText" layoutX="79.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Think of an animal and start the game.">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Button fx:id="startButton" layoutX="155.0" layoutY="288.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="169.0" text="Start">
+      <Button fx:id="startButton" layoutX="155.0" layoutY="288.0" mnemonicParsing="false" onAction="#startButton" prefHeight="48.0" prefWidth="169.0" text="Start">
          <font>
             <Font size="22.0" />
          </font>
       </Button>
-      <Text fx:id="quessText" layoutX="58.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="364.0">
+      <Text fx:id="guessText" layoutX="58.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="364.0">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <Button fx:id="yesButton" layoutX="161.0" layoutY="240.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="69.0" text="Yes">
+      <Button fx:id="yesButton" layoutX="161.0" layoutY="240.0" mnemonicParsing="false" onAction="#yesButton" prefHeight="42.0" prefWidth="69.0" text="Yes">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="noButton" layoutX="259.0" layoutY="240.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="65.0" text="No">
+      <Button fx:id="noButton" layoutX="259.0" layoutY="240.0" mnemonicParsing="false" onAction="#noButton" prefHeight="42.0" prefWidth="65.0" text="No">
          <font>
             <Font size="18.0" />
          </font>

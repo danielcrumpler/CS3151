@@ -6,7 +6,6 @@ package edu.westga.cs3151.project3.model;
  * @author Daniel Crumpler
  */
 public class BinaryNode {
-	private String nodeCannotBeNull = "node cannot be null";
 	private String value;
 	private BinaryNode parent;
 	private BinaryNode left;
@@ -62,15 +61,12 @@ public class BinaryNode {
 	/**
 	 * Sets the parent node
 	 *
-	 * @precondition parent != null
+	 * @precondition none
 	 * @postcondition getParent() == right
 	 * 
 	 * @param parent parent node to be set
 	 */
 	public void setParent(BinaryNode parent) {
-		if (parent == null) {
-			throw new IllegalArgumentException(this.nodeCannotBeNull);
-		}
 		this.parent = parent;
 	}
 
@@ -86,15 +82,12 @@ public class BinaryNode {
 	/**
 	 * Sets the left node
 	 *
-	 * @precondition left != null
+	 * @precondition none
 	 * @postcondition getLeft() == right
 	 * 
 	 * @param left left node to be set
 	 */
 	public void setLeft(BinaryNode left) {
-		if (left == null) {
-			throw new IllegalArgumentException(this.nodeCannotBeNull);
-		}
 		this.left = left;
 	}
 
@@ -110,15 +103,12 @@ public class BinaryNode {
 	/**
 	 * Sets the right node
 	 *
-	 * @precondition right != null
+	 * @precondition none
 	 * @postcondition getRight() == right
 	 * 
 	 * @param right right node to be set
 	 */
 	public void setRight(BinaryNode right) {
-		if (right == null) {
-			throw new IllegalArgumentException(this.nodeCannotBeNull);
-		}
 		this.right = right;
 	}
 }
