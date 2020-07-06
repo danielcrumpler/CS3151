@@ -206,6 +206,7 @@ public class AnimalGameController {
 			selected = false;
 		}
 		this.tree.addNewQuestion(this.questionSuggest.textProperty().getValue(), this.animalSuggest.textProperty().getValue(), selected);		
+		this.tree.resetCurrent();
 		this.setVisableWinPane(false);
 		this.setVisableThanksPane(true);
 	}

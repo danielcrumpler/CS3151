@@ -32,67 +32,7 @@ public class BinaryTree {
 		this.root = new BinaryNode(valueRoot, type);
 		this.curr = this.root;
 	}
-
-	/**
-	 * Adds a new node with the specified value as a left child of the specified
-	 * node. If parentNode has already a left child, then the left child of
-	 * parentNode becomes the left child of the new node.
-	 * 
-	 * @precondition node != null && value != null
-	 * 
-	 * @param value      the value of the new node to be added
-	 * @param type       the type of new node to be added
-	 * @param parentNode the parent of the new node
-	 */
-	public void addAsLeftChildOf(String value, String type, BinaryNode parentNode) {
-		if (parentNode == null) {
-			throw new IllegalArgumentException("node can not be null");
-		}
-		if (value == null) {
-			throw new IllegalArgumentException("value can not be null");
-		}
-		if (type == null) {
-			throw new IllegalArgumentException("type can not be null");
-		}
-		BinaryNode newNode = new BinaryNode(value, type);
-		newNode.setParent(parentNode);
-		newNode.setLeft(parentNode.getLeft());
-		parentNode.setLeft(newNode);
-		if (newNode.getLeft() != null) {
-			newNode.getLeft().setParent(newNode);
-		}
-	}
-
-	/**
-	 * Adds a new node with the specified value as a left child of the specified
-	 * node. If parentNode has already a left child, then the left child of
-	 * parentNode becomes the left child of the new node.
-	 * 
-	 * @precondition node != null && value != null
-	 * 
-	 * @param value      the value of the new node to be added
-	 * @param type       the type of new node to be added
-	 * @param parentNode the parent of the new node
-	 */
-	public void addAsRightChildOf(String value, String type, BinaryNode parentNode) {
-		if (parentNode == null) {
-			throw new IllegalArgumentException("node cannot be null");
-		}
-		if (value == null) {
-			throw new IllegalArgumentException("value cannot be null");
-		}
-		if (type == null) {
-			throw new IllegalArgumentException("type cannot be null");
-		}
-		BinaryNode newNode = new BinaryNode(value, type);
-		newNode.setParent(parentNode);
-		newNode.setRight(parentNode.getRight());
-		parentNode.setRight(newNode);
-		if (newNode.getRight() != null) {
-			newNode.getRight().setParent(newNode);
-		}
-	}
-
+	
 	/**
 	 * Adds the user defined question and animal to the Binary Tree
 	 * 
@@ -110,45 +50,58 @@ public class BinaryTree {
 			throw new IllegalArgumentException("animal value cannot be null");
 		}
 		BinaryNode question = new BinaryNode(questionValue, "Question");
-		BinaryNode animal = new BinaryNode("Is your animal a" + animalValue + "?", "Animal");
-		BinaryNode curr = this.curr;
-		BinaryNode parent = curr.getParent();
-
-		question.setParent(parent);
-		animal.setParent(question);
-		curr.setParent(question);
+		BinaryNode animal = new BinaryNode("Is your animal a " + animalValue + "?", "Animal");
+		boolean leftOrRight = this.isLeftOfParent();
+		
+		if (this.curr.getParent() != null) {
+			question.setParent(this.curr.getParent());
+			if (leftOrRight) {
+				this.curr.getParent().setLeft(question);
+			}  
+			if (!leftOrRight) {
+				this.curr.getParent().setRight(question);
+			}
+		}
 		if (bool) {
 			question.setLeft(animal);
-			question.setRight(curr);
-		} else {
-			question.setLeft(curr);
+			question.setRight(this.curr);
+		} 
+		if (!bool) {
+			question.setLeft(this.curr);
 			question.setRight(animal);
 		}
-		this.curr = question;
-		this.resetRoot();
+		question.getLeft().setParent(question);
+		question.getRight().setParent(question);
 	}
 
-	private void resetRoot() {
-		if (this.curr.getParent() == null) {
-			this.root = this.curr;
+	private boolean isLeftOfParent() {
+		boolean leftOrRight;
+		if (this.curr.getParent() != null && this.curr.getParent().getLeft().getValue() == this.curr.getValue()) {
+			leftOrRight = true;
 		} else {
-			this.resetRoot();
+			leftOrRight = false;
 		}
+		return leftOrRight;
 	}
 
+	/**
+	 * Reset current
+	 */
+	public void resetCurrent() {
+		this.curr = this.root;
+	}
+	
+	
 	/**
 	 * Gets the left node
 	 * 
 	 * @return left node
 	 */
 	public BinaryNode getLeft() {
-		if (this.curr == null) {
-			this.curr = this.root.getLeft();
-			return this.curr;
-		} else {
+		if (this.curr.getLeft() != null) {
 			this.curr = this.curr.getLeft();
-			return this.curr;
 		}
+		return this.curr;
 	}
 
 	/**
@@ -157,13 +110,10 @@ public class BinaryTree {
 	 * @return right node
 	 */
 	public BinaryNode getRight() {
-		if (this.curr == null) {
-			this.curr = this.root.getRight();
-			return this.curr;
-		} else {
+		if (this.curr.getRight() != null) {
 			this.curr = this.curr.getRight();
-			return this.curr;
 		}
+		return this.curr;
 	}
 
 	/**
