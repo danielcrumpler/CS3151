@@ -115,4 +115,13 @@ public class BinaryTree {
 			return this.curr;
 		}
 	}
+	
+	/**
+	 * Gets the root node
+	 * 
+	 * @return root node
+	 */
+	public BinaryNode getRoot() {
+		return this.root;
+	}
 }

@@ -16,13 +16,13 @@
         <menus>
           <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem fx:id="loadItem" mnemonicParsing="false" text="Load" />
-              <MenuItem fx:id="saveItem" mnemonicParsing="false" text="Save" />
+                  <MenuItem fx:id="loadItem" mnemonicParsing="false" onAction="#loadItem" text="Load" />
+              <MenuItem fx:id="saveItem" mnemonicParsing="false" onAction="#saveItem" text="Save" />
             </items>
           </Menu>
           <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem fx:id="aboutItem" mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="aboutItem" mnemonicParsing="false" onAction="#aboutItem" text="About" />
             </items>
           </Menu>
         </menus>
@@ -69,7 +69,17 @@
       <Text fx:id="wonText4" layoutX="65.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What is the answer to your question for the animal you were thinking of?" wrappingWidth="261.50390625" />
       <RadioButton fx:id="radioYes" layoutX="65.0" layoutY="280.0" mnemonicParsing="false" text="Yes" />
       <RadioButton fx:id="radioNo" layoutX="111.0" layoutY="280.0" mnemonicParsing="false" text="No" />
-      <Text fx:id="loseText" layoutX="187.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I won!">
+      <Button fx:id="submitButton" layoutX="156.0" layoutY="312.0" mnemonicParsing="false" onAction="#submitButton" prefHeight="48.0" prefWidth="169.0" text="Submit">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Text fx:id="loseText" layoutX="187.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I won!">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <Text fx:id="thanksText" layoutX="48.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thanks for improving the Animal Game!" textAlignment="CENTER" wrappingWidth="364.0">
          <font>
             <Font size="32.0" />
          </font>
