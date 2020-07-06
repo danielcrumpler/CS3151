@@ -70,10 +70,10 @@ public class BinaryNode {
 	 * @param type type to be set
 	 */
 	public void setType(String type) {
-		if (this.type == null) {
+		if (type == null) {
 			throw new IllegalArgumentException("type cannot be null");
 		}
-		if (this.type.isEmpty()) {
+		if (type.isEmpty()) {
 			throw new IllegalArgumentException("type cannot be empty");
 		}
 		this.type = type;

@@ -7,6 +7,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Window;
@@ -21,6 +24,7 @@ public class AnimalGameController {
 
 	private BinaryTree tree;
 	
+
     @FXML
     private AnchorPane pane;
 
@@ -31,16 +35,22 @@ public class AnimalGameController {
     private Menu menuFile;
 
     @FXML
+    private MenuItem closeItem;
+
+    @FXML
     private Menu menuHelp;
 
     @FXML
-    private Button startButton;
-    
+    private MenuItem aboutItem;
+
     @FXML
     private Text titleText;
-    
+
     @FXML
     private Text captionText;
+
+    @FXML
+    private Button startButton;
 
     @FXML
     private Text guessText;
@@ -51,16 +61,42 @@ public class AnimalGameController {
     @FXML
     private Button noButton;
 
+    @FXML
+    private Text wonText;
+
+    @FXML
+    private Text wonText2;
+
+    @FXML
+    private Text wonText3;
+
+    @FXML
+    private TextField animalSuggest;
+
+    @FXML
+    private TextField questionSuggest;
+
+    @FXML
+    private Text wonText4;
+
+    @FXML
+    private RadioButton radioYes;
+
+    @FXML
+    private RadioButton radioNo;
+
     /**
      * Instantiates a new BinaryTree
      */
     public AnimalGameController() {
-		this.tree = new BinaryTree("Is your animal a cat?", "Question");
+		this.tree = new BinaryTree("Is your animal a cat?", "Animal");
 	}
 
 	@FXML
 	private void initialize() {
+		this.setVisableStartPane(true);
 		this.setVisableGuessPane(false);
+		this.setVisableWinPane(false);
 	}
 
 	private void setVisableGuessPane(boolean bool) {
@@ -73,6 +109,17 @@ public class AnimalGameController {
 		this.startButton.setVisible(bool);
 		this.titleText.setVisible(bool);
 		this.captionText.setVisible(bool);
+	}
+	
+	private void setVisableWinPane(boolean bool) {
+		this.wonText.setVisible(bool);
+		this.wonText2.setVisible(bool);
+		this.wonText3.setVisible(bool);
+		this.wonText4.setVisible(bool);
+		this.animalSuggest.setVisible(bool);
+		this.questionSuggest.setVisible(bool);
+		this.radioYes.setVisible(bool);
+		this.radioNo.setVisible(bool);
 	}
 	
 	@FXML
@@ -93,7 +140,8 @@ public class AnimalGameController {
 	@FXML
 	private void noButton(ActionEvent event) {
 		if (this.tree.getRight() == null) {
-			//show you win
+			this.setVisableGuessPane(false);
+			this.setVisableWinPane(true);
 		}
 		this.guessText.textProperty().setValue(this.tree.getLeft().getValue());
 	}
