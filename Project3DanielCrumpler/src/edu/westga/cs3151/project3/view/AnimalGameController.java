@@ -189,7 +189,7 @@ public class AnimalGameController {
 
 	@FXML
 	private void yesButton(ActionEvent event) {
-		if (this.tree.getCurrent().getType() == ANIMAL) {
+		if (this.tree.getCurrent().getType().equals(ANIMAL)) {
 			this.setVisableGuessPane(false);
 			this.setVisableLossPane(true);
 		} else {
@@ -199,7 +199,7 @@ public class AnimalGameController {
 
 	@FXML
 	private void noButton(ActionEvent event) {
-		if (this.tree.getCurrent().getType() == ANIMAL) {
+		if (this.tree.getCurrent().getType().equals(ANIMAL)) {
 			this.setVisableGuessPane(false);
 			this.setVisableWinPane(true);
 		} else {
@@ -264,11 +264,11 @@ public class AnimalGameController {
 				System.err.println("Error reading file, line " + lineNumber + ": " + e.getMessage());
 			}
 		}
-		newTree.recursiveLoad(list);
+		newTree.loadList(list);
 		this.tree = newTree;
 		this.guessText.textProperty().setValue(this.tree.getRoot().getValue());
 	}
-	
+
 	@FXML
 	private void saveItem(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
