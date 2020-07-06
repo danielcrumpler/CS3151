@@ -107,7 +107,11 @@ public class AnimalGameController {
 	private Text thanksText;
 
 	/**
-	 * Instantiates a new BinaryTree
+	 * Instantiates a new AnimalGameController which makes a new BinaryTree with the
+	 * first animal.
+	 * 
+	 * @precondition none
+	 * @postcondition a new BinaryTree is made with default parameters.
 	 */
 	public AnimalGameController() {
 		this.tree = new BinaryTree("Is your animal a cat?", ANIMAL);
@@ -258,6 +262,7 @@ public class AnimalGameController {
 					lineNumber += 2;
 					String value = input.nextLine().strip();
 					String type = input.nextLine().strip();
+					type = this.checkType(lineNumber, type);
 					list.add(new BinaryNode(value, type));
 				}
 			} catch (Exception e) {
@@ -267,6 +272,17 @@ public class AnimalGameController {
 		newTree.loadList(list);
 		this.tree = newTree;
 		this.guessText.textProperty().setValue(this.tree.getRoot().getValue());
+	}
+
+	private String checkType(int lineNumber, String type) {
+		if (type.equals("Q")) {
+			type = "Question";
+		} else if (type.equals("A")) {
+			type = ANIMAL;
+		} else {
+			System.err.println("Error reading file, line " + lineNumber + ": " + "type is not allowed");
+		}
+		return type;
 	}
 
 	@FXML

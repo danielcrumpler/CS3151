@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * BinaryTree
  *
- * @author CS3151
+ * @author Daniel Crumpler
  */
 public class BinaryTree {
 
@@ -19,6 +19,7 @@ public class BinaryTree {
 	 * the specified value valueRight.
 	 * 
 	 * @precondition valueRoot != null
+	 * @postcondition getRoot().getValue() == value && getRoot().getType() == type
 	 * 
 	 * @param valueRoot value of the root
 	 * @param type      the type of node
@@ -74,7 +75,11 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Reset current
+	 * Sets the current to the root thus reseting the view.
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
 	 */
 	public void resetCurrent() {
 		this.curr = this.root;
@@ -123,22 +128,6 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Sets the current node
-	 *
-	 * @precondition none
-	 * @postcondition getRight() == right
-	 * 
-	 * @param node the node to be set
-	 * 
-	 */
-	public void setCurrent(BinaryNode node) {
-		if (node == null) {
-			throw new IllegalArgumentException("current cannot be null");
-		}
-		this.curr = node;
-	}
-
-	/**
 	 * Traverses the tree
 	 * 
 	 * @param node a node to traverse
@@ -149,7 +138,7 @@ public class BinaryTree {
 		if (node != null) {
 			list += node.getValue();
 			list += System.lineSeparator();
-			list += node.getType();
+			list += this.checkQOrA(node);
 			list += System.lineSeparator();
 			list += this.traverseTree(node.getLeft());
 			list += this.traverseTree(node.getRight());
@@ -157,6 +146,16 @@ public class BinaryTree {
 		return list;
 	}
 
+	private String checkQOrA(BinaryNode node) {
+		if (node.getType().equals("Question")) {
+			return "Q";
+		} else if (node.getType().equals("Animal")) {
+			return "A";
+		} else {
+			return "A type other then Question or Animal found in tree: " + node.getType();
+		}
+	}
+	
 	/**
 	 * Performs the adding method of new nodes to a tree for a load.
 	 * 
