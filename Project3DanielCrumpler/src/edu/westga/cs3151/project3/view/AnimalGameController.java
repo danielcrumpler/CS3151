@@ -35,7 +35,10 @@ public class AnimalGameController {
     private Menu menuFile;
 
     @FXML
-    private MenuItem closeItem;
+    private MenuItem loadItem;
+    
+    @FXML
+    private MenuItem saveItem;
 
     @FXML
     private Menu menuHelp;
@@ -85,6 +88,9 @@ public class AnimalGameController {
     @FXML
     private RadioButton radioNo;
 
+    @FXML
+    private Text loseText;
+    
     /**
      * Instantiates a new BinaryTree
      */
@@ -97,6 +103,7 @@ public class AnimalGameController {
 		this.setVisableStartPane(true);
 		this.setVisableGuessPane(false);
 		this.setVisableWinPane(false);
+		this.setVisableLossPane(false);
 	}
 
 	private void setVisableGuessPane(boolean bool) {
@@ -122,6 +129,12 @@ public class AnimalGameController {
 		this.radioNo.setVisible(bool);
 	}
 	
+	private void setVisableLossPane(boolean bool) {
+		this.startButton.setVisible(bool);
+		this.loseText.setVisible(bool);
+		this.captionText.setVisible(bool);
+	}
+	
 	@FXML
 	private void startButton(ActionEvent event) {
 		this.setVisableStartPane(false);
@@ -132,7 +145,8 @@ public class AnimalGameController {
 	@FXML
 	private void yesButton(ActionEvent event) {
 		if (this.tree.getLeft() == null) {
-			//show i win
+			this.setVisableGuessPane(false);
+			this.setVisableLossPane(true);
 		}
 		this.guessText.textProperty().setValue(this.tree.getLeft().getValue());
 	}
