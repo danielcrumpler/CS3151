@@ -14,8 +14,9 @@ public class BinaryNode {
 
 	/**
 	 * Instantiates a new node
+	 * 
 	 * @param value the value
-	 * @param type the type
+	 * @param type  the type
 	 */
 	public BinaryNode(String value, String type) {
 		this.setValue(value);
@@ -51,7 +52,7 @@ public class BinaryNode {
 		}
 		this.value = value;
 	}
-	
+
 	/**
 	 * Gets the type
 	 * 
@@ -78,7 +79,7 @@ public class BinaryNode {
 		}
 		this.type = type;
 	}
-	
+
 	/**
 	 * Gets the parent node
 	 * 
@@ -87,7 +88,7 @@ public class BinaryNode {
 	public BinaryNode getParent() {
 		return this.parent;
 	}
-	
+
 	/**
 	 * Sets the parent node
 	 *

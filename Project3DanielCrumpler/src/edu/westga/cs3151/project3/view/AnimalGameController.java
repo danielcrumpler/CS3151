@@ -22,85 +22,87 @@ import javafx.stage.Window;
  */
 public class AnimalGameController {
 
+	private static final String ANIMAL = "Animal";
+
 	private BinaryTree tree;
 
-    @FXML
-    private AnchorPane pane;
+	@FXML
+	private AnchorPane pane;
 
-    @FXML
-    private MenuBar menuBar;
+	@FXML
+	private MenuBar menuBar;
 
-    @FXML
-    private Menu menuFile;
+	@FXML
+	private Menu menuFile;
 
-    @FXML
-    private MenuItem loadItem;
-    
-    @FXML
-    private MenuItem saveItem;
+	@FXML
+	private MenuItem loadItem;
 
-    @FXML
-    private Menu menuHelp;
+	@FXML
+	private MenuItem saveItem;
 
-    @FXML
-    private MenuItem aboutItem;
+	@FXML
+	private Menu menuHelp;
 
-    @FXML
-    private Text titleText;
+	@FXML
+	private MenuItem aboutItem;
 
-    @FXML
-    private Text captionText;
+	@FXML
+	private Text titleText;
 
-    @FXML
-    private Button startButton;
+	@FXML
+	private Text captionText;
 
-    @FXML
-    private Text guessText;
+	@FXML
+	private Button startButton;
 
-    @FXML
-    private Button yesButton;
+	@FXML
+	private Text guessText;
 
-    @FXML
-    private Button noButton;
+	@FXML
+	private Button yesButton;
 
-    @FXML
-    private Text wonText;
+	@FXML
+	private Button noButton;
 
-    @FXML
-    private Text wonText2;
+	@FXML
+	private Text wonText;
 
-    @FXML
-    private Text wonText3;
+	@FXML
+	private Text wonText2;
 
-    @FXML
-    private TextField animalSuggest;
+	@FXML
+	private Text wonText3;
 
-    @FXML
-    private TextField questionSuggest;
+	@FXML
+	private TextField animalSuggest;
 
-    @FXML
-    private Text wonText4;
+	@FXML
+	private TextField questionSuggest;
 
-    @FXML
-    private RadioButton radioYes;
+	@FXML
+	private Text wonText4;
 
-    @FXML
-    private RadioButton radioNo;
+	@FXML
+	private RadioButton radioYes;
 
-    @FXML
-    private Button submitButton;
-    
-    @FXML
-    private Text loseText;
-    
-    @FXML
-    private Text thanksText;
-    
-    /**
-     * Instantiates a new BinaryTree
-     */
-    public AnimalGameController() {
-		this.tree = new BinaryTree("Is your animal a cat?", "Animal");
+	@FXML
+	private RadioButton radioNo;
+
+	@FXML
+	private Button submitButton;
+
+	@FXML
+	private Text loseText;
+
+	@FXML
+	private Text thanksText;
+
+	/**
+	 * Instantiates a new BinaryTree
+	 */
+	public AnimalGameController() {
+		this.tree = new BinaryTree("Is your animal a cat?", ANIMAL);
 	}
 
 	@FXML
@@ -131,13 +133,13 @@ public class AnimalGameController {
 		this.noButton.setVisible(bool);
 		this.guessText.setVisible(bool);
 	}
-	
+
 	private void setVisableStartPane(boolean bool) {
 		this.startButton.setVisible(bool);
 		this.titleText.setVisible(bool);
 		this.captionText.setVisible(bool);
 	}
-	
+
 	private void setVisableWinPane(boolean bool) {
 		this.wonText.setVisible(bool);
 		this.wonText2.setVisible(bool);
@@ -149,19 +151,19 @@ public class AnimalGameController {
 		this.radioNo.setVisible(bool);
 		this.submitButton.setVisible(bool);
 	}
-	
+
 	private void setVisableLossPane(boolean bool) {
 		this.startButton.setVisible(bool);
 		this.loseText.setVisible(bool);
 		this.captionText.setVisible(bool);
 	}
-	
+
 	private void setVisableThanksPane(boolean bool) {
 		this.startButton.setVisible(bool);
 		this.captionText.setVisible(bool);
 		this.thanksText.setVisible(bool);
 	}
-	
+
 	@FXML
 	private void startButton(ActionEvent event) {
 		this.setVisableStartPane(false);
@@ -170,43 +172,54 @@ public class AnimalGameController {
 		this.setVisableGuessPane(true);
 		this.guessText.textProperty().setValue(this.tree.getRoot().getValue());
 	}
-	
+
 	@FXML
 	private void yesButton(ActionEvent event) {
-		if (this.tree.getLeft() == null) {
+		if (this.tree.getCurrent().getType() == ANIMAL) {
 			this.setVisableGuessPane(false);
 			this.setVisableLossPane(true);
 		} else {
 			this.guessText.textProperty().setValue(this.tree.getLeft().getValue());
 		}
 	}
-	
+
 	@FXML
 	private void noButton(ActionEvent event) {
-		if (this.tree.getRight() == null) {
+		if (this.tree.getCurrent().getType() == ANIMAL) {
 			this.setVisableGuessPane(false);
 			this.setVisableWinPane(true);
 		} else {
 			this.guessText.textProperty().setValue(this.tree.getRight().getValue());
 		}
 	}
-	
+
 	@FXML
 	private void submitButton(ActionEvent event) {
+		//check text boxes to see if empty
+		//check radios to see if selected
+		//make new question
+		boolean selected = false;
+		if (this.radioYes.isSelected()) {
+			selected = true;
+		}
+		if (this.radioNo.isSelected()) {
+			selected = false;
+		}
+		this.tree.addNewQuestion(this.questionSuggest.textProperty().getValue(), this.animalSuggest.textProperty().getValue(), selected);		
 		this.setVisableWinPane(false);
 		this.setVisableThanksPane(true);
 	}
 
 	@FXML
 	private void loadItem(ActionEvent event) {
-		
+
 	}
-	
+
 	@FXML
 	private void saveItem(ActionEvent event) {
-		
+
 	}
-	
+
 	@FXML
 	private void aboutItem(ActionEvent event) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -218,4 +231,3 @@ public class AnimalGameController {
 		alert.showAndWait();
 	}
 }
-

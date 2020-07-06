@@ -1,6 +1,5 @@
 package edu.westga.cs3151.project3;
 
-
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -50,4 +49,3 @@ public class Main extends Application {
 		launch(args);
 	}
 }
-

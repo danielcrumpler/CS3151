@@ -18,8 +18,8 @@ public class BinaryTree {
 	 * 
 	 * @precondition valueRoot != null
 	 * 
-	 * @param valueRoot  value of the root
-	 * @param type the type of node
+	 * @param valueRoot value of the root
+	 * @param type      the type of node
 	 */
 
 	public BinaryTree(String valueRoot, String type) {
@@ -30,6 +30,7 @@ public class BinaryTree {
 			throw new IllegalArgumentException("the value of the root cannot be empty");
 		}
 		this.root = new BinaryNode(valueRoot, type);
+		this.curr = this.root;
 	}
 
 	/**
@@ -40,7 +41,7 @@ public class BinaryTree {
 	 * @precondition node != null && value != null
 	 * 
 	 * @param value      the value of the new node to be added
-	 * @param type the type of new node to be added
+	 * @param type       the type of new node to be added
 	 * @param parentNode the parent of the new node
 	 */
 	public void addAsLeftChildOf(String value, String type, BinaryNode parentNode) {
@@ -50,6 +51,9 @@ public class BinaryTree {
 		if (value == null) {
 			throw new IllegalArgumentException("value can not be null");
 		}
+		if (type == null) {
+			throw new IllegalArgumentException("type can not be null");
+		}
 		BinaryNode newNode = new BinaryNode(value, type);
 		newNode.setParent(parentNode);
 		newNode.setLeft(parentNode.getLeft());
@@ -58,7 +62,7 @@ public class BinaryTree {
 			newNode.getLeft().setParent(newNode);
 		}
 	}
-	
+
 	/**
 	 * Adds a new node with the specified value as a left child of the specified
 	 * node. If parentNode has already a left child, then the left child of
@@ -67,7 +71,7 @@ public class BinaryTree {
 	 * @precondition node != null && value != null
 	 * 
 	 * @param value      the value of the new node to be added
-	 * @param type the type of new node to be added
+	 * @param type       the type of new node to be added
 	 * @param parentNode the parent of the new node
 	 */
 	public void addAsRightChildOf(String value, String type, BinaryNode parentNode) {
@@ -77,6 +81,9 @@ public class BinaryTree {
 		if (value == null) {
 			throw new IllegalArgumentException("value cannot be null");
 		}
+		if (type == null) {
+			throw new IllegalArgumentException("type cannot be null");
+		}
 		BinaryNode newNode = new BinaryNode(value, type);
 		newNode.setParent(parentNode);
 		newNode.setRight(parentNode.getRight());
@@ -85,7 +92,50 @@ public class BinaryTree {
 			newNode.getRight().setParent(newNode);
 		}
 	}
-	
+
+	/**
+	 * Adds the user defined question and animal to the Binary Tree
+	 * 
+	 * @precondition questionValue != null && animalValue != null
+	 * 
+	 * @param questionValue the value of the question node to be added
+	 * @param animalValue   the value of the animal node to be added
+	 * @param bool          the value of if the question is the animal
+	 */
+	public void addNewQuestion(String questionValue, String animalValue, Boolean bool) {
+		if (questionValue == null) {
+			throw new IllegalArgumentException("question value cannot be null");
+		}
+		if (animalValue == null) {
+			throw new IllegalArgumentException("animal value cannot be null");
+		}
+		BinaryNode question = new BinaryNode(questionValue, "Question");
+		BinaryNode animal = new BinaryNode("Is your animal a" + animalValue + "?", "Animal");
+		BinaryNode curr = this.curr;
+		BinaryNode parent = curr.getParent();
+
+		question.setParent(parent);
+		animal.setParent(question);
+		curr.setParent(question);
+		if (bool) {
+			question.setLeft(animal);
+			question.setRight(curr);
+		} else {
+			question.setLeft(curr);
+			question.setRight(animal);
+		}
+		this.curr = question;
+		this.resetRoot();
+	}
+
+	private void resetRoot() {
+		if (this.curr.getParent() == null) {
+			this.root = this.curr;
+		} else {
+			this.resetRoot();
+		}
+	}
+
 	/**
 	 * Gets the left node
 	 * 
@@ -100,7 +150,7 @@ public class BinaryTree {
 			return this.curr;
 		}
 	}
-	
+
 	/**
 	 * Gets the right node
 	 * 
@@ -115,7 +165,7 @@ public class BinaryTree {
 			return this.curr;
 		}
 	}
-	
+
 	/**
 	 * Gets the root node
 	 * 
@@ -123,5 +173,14 @@ public class BinaryTree {
 	 */
 	public BinaryNode getRoot() {
 		return this.root;
+	}
+
+	/**
+	 * Gets the current node
+	 * 
+	 * @return current node
+	 */
+	public BinaryNode getCurrent() {
+		return this.curr;
 	}
 }
