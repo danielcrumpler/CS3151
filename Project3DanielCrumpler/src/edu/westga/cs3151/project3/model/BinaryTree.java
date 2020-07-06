@@ -8,6 +8,7 @@ package edu.westga.cs3151.project3.model;
 public class BinaryTree {
 
 	private BinaryNode root;
+	private BinaryNode curr = null;
 
 	/**
 	 * Instantiates a new binary tree with three nodes: The root of the new tree has
@@ -15,7 +16,7 @@ public class BinaryTree {
 	 * of root has the specified value valueLeft, and the right child of root has
 	 * the specified value valueRight.
 	 * 
-	 * @precondition valueRoot != null && valueLeft != null && valueRight != null
+	 * @precondition valueRoot != null
 	 * 
 	 * @param valueRoot  value of the root
 	 */
@@ -28,8 +29,6 @@ public class BinaryTree {
 			throw new IllegalArgumentException("the value of the root cannot be empty");
 		}
 		this.root = new BinaryNode(valueRoot);
-		this.root.getLeft().setParent(this.root);
-		this.root.getRight().setParent(this.root);
 	}
 
 	/**
@@ -81,6 +80,34 @@ public class BinaryTree {
 		parentNode.setRight(newNode);
 		if (newNode.getRight() != null) {
 			newNode.getRight().setParent(newNode);
+		}
+	}
+	
+	/**
+	 * Gets the left node
+	 * 
+	 * @return left node
+	 */
+	public BinaryNode getLeft() {
+		if (this.curr == null) {
+			this.curr = this.root.getLeft();
+			return this.curr;
+		} else {
+			return this.curr.getLeft();
+		}
+	}
+	
+	/**
+	 * Gets the right node
+	 * 
+	 * @return right node
+	 */
+	public BinaryNode getRight() {
+		if (this.curr == null) {
+			this.curr = this.root.getRight();
+			return this.curr;
+		} else {
+			return this.curr.getRight();
 		}
 	}
 }

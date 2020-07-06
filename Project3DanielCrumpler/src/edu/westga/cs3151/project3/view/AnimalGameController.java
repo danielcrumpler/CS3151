@@ -19,7 +19,7 @@ import javafx.stage.Window;
  */
 public class AnimalGameController {
 
-	BinaryTree tree;
+	private BinaryTree tree;
 	
     @FXML
     private AnchorPane pane;
@@ -35,6 +35,12 @@ public class AnimalGameController {
 
     @FXML
     private Button startButton;
+    
+    @FXML
+    private Text titleText;
+    
+    @FXML
+    private Text captionText;
 
     @FXML
     private Text quessText;
@@ -63,19 +69,32 @@ public class AnimalGameController {
 		this.quessText.setVisible(bool);
 	}
 	
+	private void setVisableStartPane(boolean bool) {
+		this.startButton.setVisible(bool);
+		this.titleText.setVisible(bool);
+		this.captionText.setVisible(bool);
+	}
+	
 	@FXML
 	private void startButton(ActionEvent event) {
+		this.setVisableStartPane(false);
 		this.setVisableGuessPane(true);
 	}
 	
 	@FXML
 	private void yesButton(ActionEvent event) {
-		this.tree
+		if (this.tree.getLeft() == null) {
+			//show i win
+		}
+		this.tree.getLeft();
 	}
 	
 	@FXML
 	private void noButton(ActionEvent event) {
-
+		if (this.tree.getRight() == null) {
+			//show you win
+		}
+		this.tree.getRight();
 	}
 	
 	@FXML
