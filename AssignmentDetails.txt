@@ -4,3 +4,4 @@ Activity 2: Triangular Matrix
 Activity 3: Linked List
 Activity 4: Stacks, Queues, and Deques
 Lab 1: Linear Data Structure
+Lab 2: Depth-First Search and Breadth-First Search
