@@ -1,5 +1,7 @@
 package edu.westga.cs3151.project3.model;
 
+import java.util.ArrayList;
+
 /**
  * BinaryTree
  *
@@ -72,6 +74,60 @@ public class BinaryTree {
 	}
 
 	/**
+	 * Adds a new node with the specified value as a left child of the specified
+	 * node. If parentNode has already a left child, then the left child of
+	 * parentNode becomes the left child of the new node.
+	 *
+	 * @precondition node != null && value != null
+	 * @param value      the value of the new node to be added
+	 * @param type       the type of the new node to be added
+	 * @param parentNode the parent of the new node
+	 */
+	public void addAsLeftChildOf(String value, String type, BinaryNode parentNode) {
+		if (parentNode == null) {
+			throw new IllegalArgumentException("node can not be null");
+		}
+		if (value == null) {
+			throw new IllegalArgumentException("value can not be null");
+		}
+
+		BinaryNode newNode = new BinaryNode(value, type);
+		newNode.setParent(parentNode);
+		newNode.setLeft(parentNode.getLeft());
+		parentNode.setLeft(newNode);
+		if (newNode.getLeft() != null) {
+			newNode.getLeft().setParent(newNode);
+		}
+	}
+
+	/**
+	 * Adds a new node with the specified value as a right child of the specified
+	 * node. If parentNode has already a right child, then the right child of
+	 * parentNode becomes the right child of the new node.
+	 *
+	 * @precondition node != null && value != null
+	 * @param value      the value of the new node to be added
+	 * @param type       the type of the new node to be added
+	 * @param parentNode the parent of the new node
+	 */
+	public void addAsRightChildOf(String value, String type, BinaryNode parentNode) {
+		if (parentNode == null) {
+			throw new IllegalArgumentException("node cannot be null");
+		}
+		if (value == null) {
+			throw new IllegalArgumentException("value cannot be null");
+		}
+
+		BinaryNode newNode = new BinaryNode(value, type);
+		newNode.setParent(parentNode);
+		newNode.setRight(parentNode.getRight());
+		parentNode.setRight(newNode);
+		if (newNode.getRight() != null) {
+			newNode.getRight().setParent(newNode);
+		}
+	}
+
+	/**
 	 * Reset current
 	 */
 	public void resetCurrent() {
@@ -121,6 +177,22 @@ public class BinaryTree {
 	}
 
 	/**
+	 * Sets the current node
+	 *
+	 * @precondition none
+	 * @postcondition getRight() == right
+	 * 
+	 * @param node the node to be set
+	 * 
+	 */
+	public void setCurrent(BinaryNode node) {
+		if (node == null) {
+			throw new IllegalArgumentException("current cannot be null");
+		}
+		this.curr = node;
+	}
+
+	/**
 	 * Traverses the tree
 	 * 
 	 * @param node a node to traverse
@@ -137,5 +209,16 @@ public class BinaryTree {
 			list += this.traverseTree(node.getRight());
 		}
 		return list;
+	}
+	
+	public void recursiveLoad(ArrayList<BinaryNode> list) {
+		boolean leftOrRight =  true;
+		for (BinaryNode listItem : list) {
+			if (leftOrRight) {
+				this.curr.setLeft(listItem);
+			} else {
+				this.curr.setRight(listItem);
+			}
+		}
 	}
 }

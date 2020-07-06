@@ -2,7 +2,10 @@ package edu.westga.cs3151.project3.view;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
+import edu.westga.cs3151.project3.model.BinaryNode;
 import edu.westga.cs3151.project3.model.BinaryTree;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -235,12 +238,37 @@ public class AnimalGameController {
 		filter = new ExtensionFilter("All Files", "*.*");
 		fileChooser.getExtensionFilters().add(filter);
 	}
-	
+
 	@FXML
 	private void loadItem(ActionEvent event) {
-
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open");
+		this.setLoadFileFilters(fileChooser);
+		Window owner = this.pane.getScene().getWindow();
+		File selectedFile = fileChooser.showOpenDialog(owner);
+		int lineNumber = 0;
+		BinaryTree newTree = null;
+		ArrayList<BinaryNode> list = new ArrayList<BinaryNode>();
+		if (selectedFile != null) {
+			try (Scanner input = new Scanner(selectedFile)) {
+				String treeValue = input.nextLine();
+				String treeType = input.nextLine();
+				newTree = new BinaryTree(treeValue, treeType);
+				while (input.hasNextLine()) {
+					lineNumber += 2;
+					String value = input.nextLine().strip();
+					String type = input.nextLine().strip();
+					list.add(new BinaryNode(value, type));
+				}
+			} catch (Exception e) {
+				System.err.println("Error reading file, line " + lineNumber + ": " + e.getMessage());
+			}
+		}
+		newTree.recursiveLoad(list);
+		this.tree = newTree;
+		this.guessText.textProperty().setValue(this.tree.getRoot().getValue());
 	}
-
+	
 	@FXML
 	private void saveItem(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
