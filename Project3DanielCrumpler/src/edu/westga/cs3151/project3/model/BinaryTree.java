@@ -19,16 +19,17 @@ public class BinaryTree {
 	 * @precondition valueRoot != null
 	 * 
 	 * @param valueRoot  value of the root
+	 * @param type the type of node
 	 */
 
-	public BinaryTree(String valueRoot) {
+	public BinaryTree(String valueRoot, String type) {
 		if (valueRoot == null) {
 			throw new IllegalArgumentException("the value of the root cannot be null");
 		}
 		if (valueRoot.isEmpty()) {
 			throw new IllegalArgumentException("the value of the root cannot be empty");
 		}
-		this.root = new BinaryNode(valueRoot);
+		this.root = new BinaryNode(valueRoot, type);
 	}
 
 	/**
@@ -39,16 +40,17 @@ public class BinaryTree {
 	 * @precondition node != null && value != null
 	 * 
 	 * @param value      the value of the new node to be added
+	 * @param type the type of new node to be added
 	 * @param parentNode the parent of the new node
 	 */
-	public void addAsLeftChildOf(String value, BinaryNode parentNode) {
+	public void addAsLeftChildOf(String value, String type, BinaryNode parentNode) {
 		if (parentNode == null) {
 			throw new IllegalArgumentException("node can not be null");
 		}
 		if (value == null) {
 			throw new IllegalArgumentException("value can not be null");
 		}
-		BinaryNode newNode = new BinaryNode(value);
+		BinaryNode newNode = new BinaryNode(value, type);
 		newNode.setParent(parentNode);
 		newNode.setLeft(parentNode.getLeft());
 		parentNode.setLeft(newNode);
@@ -65,16 +67,17 @@ public class BinaryTree {
 	 * @precondition node != null && value != null
 	 * 
 	 * @param value      the value of the new node to be added
+	 * @param type the type of new node to be added
 	 * @param parentNode the parent of the new node
 	 */
-	public void addAsRightChildOf(String value, BinaryNode parentNode) {
+	public void addAsRightChildOf(String value, String type, BinaryNode parentNode) {
 		if (parentNode == null) {
 			throw new IllegalArgumentException("node cannot be null");
 		}
 		if (value == null) {
 			throw new IllegalArgumentException("value cannot be null");
 		}
-		BinaryNode newNode = new BinaryNode(value);
+		BinaryNode newNode = new BinaryNode(value, type);
 		newNode.setParent(parentNode);
 		newNode.setRight(parentNode.getRight());
 		parentNode.setRight(newNode);
@@ -93,7 +96,8 @@ public class BinaryTree {
 			this.curr = this.root.getLeft();
 			return this.curr;
 		} else {
-			return this.curr.getLeft();
+			this.curr = this.curr.getLeft();
+			return this.curr;
 		}
 	}
 	
@@ -107,7 +111,8 @@ public class BinaryTree {
 			this.curr = this.root.getRight();
 			return this.curr;
 		} else {
-			return this.curr.getRight();
+			this.curr = this.curr.getRight();
+			return this.curr;
 		}
 	}
 }

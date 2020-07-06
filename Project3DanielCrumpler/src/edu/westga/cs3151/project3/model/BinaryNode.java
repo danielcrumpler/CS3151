@@ -7,16 +7,19 @@ package edu.westga.cs3151.project3.model;
  */
 public class BinaryNode {
 	private String value;
+	private String type;
 	private BinaryNode parent;
 	private BinaryNode left;
 	private BinaryNode right;
 
 	/**
 	 * Instantiates a new node
-	 * @param value value
+	 * @param value the value
+	 * @param type the type
 	 */
-	public BinaryNode(String value) {
+	public BinaryNode(String value, String type) {
 		this.setValue(value);
+		this.setType(type);
 		this.setParent(null);
 		this.setLeft(null);
 		this.setRight(null);
@@ -47,6 +50,33 @@ public class BinaryNode {
 			throw new IllegalArgumentException("value cannot be empty");
 		}
 		this.value = value;
+	}
+	
+	/**
+	 * Gets the type
+	 * 
+	 * @return type type
+	 */
+	public String getType() {
+		return this.type;
+	}
+
+	/**
+	 * Sets the type for the node
+	 * 
+	 * @precondition type != null && !type.isEmpty
+	 * @postcondition getType() == type
+	 * 
+	 * @param type type to be set
+	 */
+	public void setType(String type) {
+		if (this.type == null) {
+			throw new IllegalArgumentException("type cannot be null");
+		}
+		if (this.type.isEmpty()) {
+			throw new IllegalArgumentException("type cannot be empty");
+		}
+		this.type = type;
 	}
 	
 	/**

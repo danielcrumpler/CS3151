@@ -55,7 +55,7 @@ public class AnimalGameController {
      * Instantiates a new BinaryTree
      */
     public AnimalGameController() {
-		this.tree = new BinaryTree("Is your animal a cat?");
+		this.tree = new BinaryTree("Is your animal a cat?", "Question");
 	}
 
 	@FXML
@@ -79,6 +79,7 @@ public class AnimalGameController {
 	private void startButton(ActionEvent event) {
 		this.setVisableStartPane(false);
 		this.setVisableGuessPane(true);
+		this.guessText.textProperty().setValue("Is your animal a cat?");
 	}
 	
 	@FXML
@@ -86,7 +87,7 @@ public class AnimalGameController {
 		if (this.tree.getLeft() == null) {
 			//show i win
 		}
-		this.tree.getLeft();
+		this.guessText.textProperty().setValue(this.tree.getLeft().getValue());
 	}
 	
 	@FXML
@@ -94,7 +95,7 @@ public class AnimalGameController {
 		if (this.tree.getRight() == null) {
 			//show you win
 		}
-		this.tree.getRight();
+		this.guessText.textProperty().setValue(this.tree.getLeft().getValue());
 	}
 	
 	@FXML
