@@ -32,7 +32,7 @@ public class BinaryTree {
 		this.root = new BinaryNode(valueRoot, type);
 		this.curr = this.root;
 	}
-	
+
 	/**
 	 * Adds the user defined question and animal to the Binary Tree
 	 * 
@@ -49,49 +49,35 @@ public class BinaryTree {
 		if (animalValue == null) {
 			throw new IllegalArgumentException("animal value cannot be null");
 		}
-		BinaryNode question = new BinaryNode(questionValue, "Question");
-		BinaryNode animal = new BinaryNode("Is your animal a " + animalValue + "?", "Animal");
-		boolean leftOrRight = this.isLeftOfParent();
+
+		String currValue = this.curr.getValue();
+		String currType = this.curr.getType();
+
+		this.curr.setType("Question");
+		this.curr.setValue(questionValue);
 		
-		if (this.curr.getParent() != null) {
-			question.setParent(this.curr.getParent());
-			if (leftOrRight) {
-				this.curr.getParent().setLeft(question);
-			}  
-			if (!leftOrRight) {
-				this.curr.getParent().setRight(question);
-			}
-		}
 		if (bool) {
-			question.setLeft(animal);
-			question.setRight(this.curr);
-		} 
-		if (!bool) {
-			question.setLeft(this.curr);
-			question.setRight(animal);
-		}
-		question.getLeft().setParent(question);
-		question.getRight().setParent(question);
-	}
-
-	private boolean isLeftOfParent() {
-		boolean leftOrRight;
-		if (this.curr.getParent() != null && this.curr.getParent().getLeft().getValue() == this.curr.getValue()) {
-			leftOrRight = true;
+			this.curr.setLeft(new BinaryNode("Is your animal a " + animalValue + "?", "Animal"));
+			this.curr.setRight(new BinaryNode(currValue, currType));
+			this.curr.getLeft().setParent(this.curr);
+			this.curr.getRight().setParent(this.curr);
+		} else if (!bool) {
+			this.curr.setLeft(new BinaryNode(currValue, currType));
+			this.curr.setRight(new BinaryNode("Is your animal a " + animalValue + "?", "Animal"));
+			this.curr.getLeft().setParent(this.curr);
+			this.curr.getRight().setParent(this.curr);
 		} else {
-			leftOrRight = false;
+			throw new IllegalArgumentException("Something Went Wrong");
 		}
-		return leftOrRight;
 	}
-
+	
 	/**
 	 * Reset current
 	 */
 	public void resetCurrent() {
 		this.curr = this.root;
 	}
-	
-	
+
 	/**
 	 * Gets the left node
 	 * 

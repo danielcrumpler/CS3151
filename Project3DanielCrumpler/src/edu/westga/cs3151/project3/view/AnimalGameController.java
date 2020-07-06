@@ -171,6 +171,7 @@ public class AnimalGameController {
 		this.setVisableThanksPane(false);
 		this.setVisableGuessPane(true);
 		this.guessText.textProperty().setValue(this.tree.getRoot().getValue());
+		this.tree.resetCurrent();
 	}
 
 	@FXML
@@ -206,14 +207,13 @@ public class AnimalGameController {
 			selected = false;
 		}
 		this.tree.addNewQuestion(this.questionSuggest.textProperty().getValue(), this.animalSuggest.textProperty().getValue(), selected);		
-		this.tree.resetCurrent();
 		this.setVisableWinPane(false);
 		this.setVisableThanksPane(true);
 	}
 
 	@FXML
 	private void loadItem(ActionEvent event) {
-
+		
 	}
 
 	@FXML
