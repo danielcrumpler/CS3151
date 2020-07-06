@@ -1,5 +1,8 @@
 package edu.westga.cs3151.project3.view;
 
+import java.io.File;
+import java.io.PrintWriter;
+
 import edu.westga.cs3151.project3.model.BinaryTree;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +15,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  * The class AnimalGameController
@@ -152,6 +157,11 @@ public class AnimalGameController {
 		this.submitButton.setVisible(bool);
 	}
 
+	private void clearTextFields() {
+		this.animalSuggest.textProperty().setValue("");
+		this.questionSuggest.textProperty().setValue("");
+	}
+
 	private void setVisableLossPane(boolean bool) {
 		this.startButton.setVisible(bool);
 		this.loseText.setVisible(bool);
@@ -196,29 +206,57 @@ public class AnimalGameController {
 
 	@FXML
 	private void submitButton(ActionEvent event) {
-		//check text boxes to see if empty
-		//check radios to see if selected
-		//make new question
-		boolean selected = false;
-		if (this.radioYes.isSelected()) {
-			selected = true;
+		if (!this.animalSuggest.textProperty().getValue().equals("")
+				&& !this.questionSuggest.textProperty().getValue().equals("") && this.atLeastOneRadioSelected()) {
+			boolean selected = false;
+			if (this.radioYes.isSelected()) {
+				selected = true;
+			}
+			if (this.radioNo.isSelected()) {
+				selected = false;
+			}
+			this.tree.addNewQuestion(this.questionSuggest.textProperty().getValue(),
+					this.animalSuggest.textProperty().getValue(), selected);
+			this.setVisableWinPane(false);
+			this.clearTextFields();
+			this.setVisableThanksPane(true);
+		} else {
+			throw new IllegalArgumentException("A Text Field is empty or a Button is not selected.");
 		}
-		if (this.radioNo.isSelected()) {
-			selected = false;
-		}
-		this.tree.addNewQuestion(this.questionSuggest.textProperty().getValue(), this.animalSuggest.textProperty().getValue(), selected);		
-		this.setVisableWinPane(false);
-		this.setVisableThanksPane(true);
 	}
 
+	private boolean atLeastOneRadioSelected() {
+		return this.radioYes.isSelected() || this.radioNo.isSelected();
+	}
+
+	private void setLoadFileFilters(FileChooser fileChooser) {
+		ExtensionFilter filter = new ExtensionFilter("Animal Game Tree", "*.agt");
+		fileChooser.getExtensionFilters().add(filter);
+		filter = new ExtensionFilter("All Files", "*.*");
+		fileChooser.getExtensionFilters().add(filter);
+	}
+	
 	@FXML
 	private void loadItem(ActionEvent event) {
-		
+
 	}
 
 	@FXML
 	private void saveItem(ActionEvent event) {
+		FileChooser fileChooser = new FileChooser();
+		this.setLoadFileFilters(fileChooser);
 
+		Window owner = this.pane.getScene().getWindow();
+		File selectedFile = fileChooser.showSaveDialog(owner);
+
+		if (selectedFile != null) {
+			try (PrintWriter writer = new PrintWriter(selectedFile)) {
+				String output = this.tree.traverseTree(this.tree.getRoot());
+				writer.println(output);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@FXML

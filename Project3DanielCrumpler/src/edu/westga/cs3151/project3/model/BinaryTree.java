@@ -55,7 +55,7 @@ public class BinaryTree {
 
 		this.curr.setType("Question");
 		this.curr.setValue(questionValue);
-		
+
 		if (bool) {
 			this.curr.setLeft(new BinaryNode("Is your animal a " + animalValue + "?", "Animal"));
 			this.curr.setRight(new BinaryNode(currValue, currType));
@@ -70,7 +70,7 @@ public class BinaryTree {
 			throw new IllegalArgumentException("Something Went Wrong");
 		}
 	}
-	
+
 	/**
 	 * Reset current
 	 */
@@ -118,5 +118,24 @@ public class BinaryTree {
 	 */
 	public BinaryNode getCurrent() {
 		return this.curr;
+	}
+
+	/**
+	 * Traverses the tree
+	 * 
+	 * @param node a node to traverse
+	 * @return value and type of node
+	 */
+	public String traverseTree(BinaryNode node) {
+		String list = "";
+		if (node != null) {
+			list += node.getValue();
+			list += System.lineSeparator();
+			list += node.getType();
+			list += System.lineSeparator();
+			list += this.traverseTree(node.getLeft());
+			list += this.traverseTree(node.getRight());
+		}
+		return list;
 	}
 }
