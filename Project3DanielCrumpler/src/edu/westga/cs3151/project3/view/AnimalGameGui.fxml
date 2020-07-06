@@ -5,7 +5,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -26,43 +25,35 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Pane fx:id="startPane" prefHeight="400.0" prefWidth="479.0">
-         <children>
-            <Button fx:id="startButton" layoutX="155.0" layoutY="247.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="169.0" text="Start">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Button>
-            <Text layoutX="63.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Animal Game!">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Text>
-            <Text layoutX="78.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Think of an animal and start the game.">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
-      <Pane fx:id="quessPane" prefHeight="400.0" prefWidth="479.0">
-         <children>
-            <Text fx:id="quessText" layoutX="58.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="364.0">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Text>
-            <Button fx:id="yesButton" layoutX="156.0" layoutY="200.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="69.0" text="Yes">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="noButton" layoutX="259.0" layoutY="200.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="65.0" text="No">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
+      <Text layoutX="64.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Animal Game!">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text layoutX="79.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Think of an animal and start the game.">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Button fx:id="startButton" layoutX="155.0" layoutY="288.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="169.0" text="Start">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Text fx:id="quessText" layoutX="58.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="364.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Button fx:id="yesButton" layoutX="161.0" layoutY="240.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="69.0" text="Yes">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="noButton" layoutX="259.0" layoutY="240.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="65.0" text="No">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
